@@ -34,6 +34,7 @@ $listsabun = query("SELECT * FROM data_sabun_muka");
 
 <head>
   <title>AdnanRise facial shop web</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.5.0-beta.5/lightgallery.es5.min.js" integrity="sha512-ssPi1cTYTwYV0e6IRdIId4ytENOrTDvixXo8l0DaTBAwYw9yD6rk9HU06pWRCoSWSRKwrucdVS/2fMC1getgcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="asset/css/style3.css">
@@ -93,6 +94,31 @@ $listsabun = query("SELECT * FROM data_sabun_muka");
         font-size: 3.5rem;
       }
     }
+
+    /*  */
+    .social-link {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      border-radius: 50%;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .social-link:hover,
+    .social-link:focus {
+      background: #ddd;
+      text-decoration: none;
+      color: #555;
+    }
+
+    .progress {
+      height: 10px;
+    }
   </style>
 </head>
 
@@ -112,9 +138,6 @@ $listsabun = query("SELECT * FROM data_sabun_muka");
         <a class="nav-link" href="#scrollspyHeading1" style="color:black; background-color: #0DCAF0;">Produk</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#scrollspyHeading2" style="color:black; background-color: #0DCAF0;">Testimoni</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="login.php" style="color:black;">Login</a>
       </li>
       <li class="nav-item">
@@ -128,65 +151,45 @@ $listsabun = query("SELECT * FROM data_sabun_muka");
   <br><br>
   <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
     <div class="container-xl mt-5 fs-2">
-      <h4 id="scrollspyHeading1" class="d-flex justify-content-center fs-2"> Daftar Produk</h4>
-      <p class="d-flex justify-content-center fs-4">Oleh AdnanRise faccial group</p>
+      <h2 class="font-weight-bold mb-2">Daftar Sabun Kesehatan</h2>
+      <p class="font-italic text-muted mb-4">Oleh AdnanRise personal group</p>
+      <br><br>
       <div class="row">
         <div id="tabel-sabun">
-          <table border="1" cellpadding="10" cellspacing="0" width="600px" class="table table-bordered table-hover table-secondary mt-4">
-
-            <tr class="thead-dark text-center">
-              <th>No.</th>
-              <th>Gambar</th>
-              <th>Nama Sabun</th>
-              <th>Bahan Sabun</th>
-              <th>Kegunaan Sabun</th>
-              <th>Harga</th>
-              <th>Action</th>
-            </tr>
-
+          <!--  -->
+          <div class="row pb-5 mb-4 mt-5">
             <?php $i = 1; ?>
             <?php foreach ($listsabun as $row) : ?>
-              <tr class="thead-dark text-center">
+              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <!-- Card-->
                 <form action="" method="post">
-                  <td><?= $i; ?></td>
-                  <td><input type="hidden" name="product_gambar" value="../asset/uploaded-img/<?= $row["gambar_sabun_muka"]; ?>"><img src="asset/uploaded-img/<?= $row["gambar_sabun_muka"]; ?>" class="rounded foto" width="auto" height="50px"></td>
-                  <td><input type="hidden" name="product_nama" value="<?= $row["nama_sabun_muka"]; ?>"><?= $row["nama_sabun_muka"]; ?></td>
-                  <td><input type="hidden" name="product_bahan" value="<?= $row["bahan_sabun_muka"]; ?>"><?= $row["bahan_sabun_muka"]; ?></td>
-                  <td><input type="hidden" name="product_kegunaan" value="<?= $row["kegunaan_sabun_muka"]; ?>"><?= $row["kegunaan_sabun_muka"]; ?></td>
-                  <td><input type="hidden" name="product_harga" value="<?= $row["harga_sabun_muka"]; ?>"><?= $row["harga_sabun_muka"]; ?></td>
-                  <td>
-
-                    <a href="login.php" class="btn btn-sm text-black bg-info">Detail</a>
-                    <a href="login.php" class="btn btn-sm text-black bg-info">Tambah ke keranjang</a>
-                  </td>
+                  <div class="card rounded shadow-sm border-0">
+                    <span><input type="hidden" name="product_harga" value="<?= $row["harga_sabun_muka"]; ?>"><?= $row["harga_sabun_muka"]; ?></span>
+                    <div class="card-body p-4"><input type="hidden" name="product_gambar" value="../asset/uploaded-img/<?= $row["gambar_sabun_muka"]; ?>"><img src="asset/uploaded-img/<?= $row["gambar_sabun_muka"]; ?>" class="img-fluid d-block mx-auto mb-3" width="auto" height="50px">
+                      <h5 class="text-dark"><input type="hidden" name="product_nama" value="<?= $row["nama_sabun_muka"]; ?>"><?= $row["nama_sabun_muka"]; ?></h5>
+                      <p class="text-muted font-italic border-bottom"><input type="hidden" name="product_kegunaan" value="<?= $row["kegunaan_sabun_muka"]; ?>"><?= $row["kegunaan_sabun_muka"]; ?></p>
+                      <p class="small font-italic"><input type="hidden" name="product_bahan" value="<?= $row["bahan_sabun_muka"]; ?>"><?= $row["bahan_sabun_muka"]; ?></p>
+                      <ul class="list-inline small">
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i><a href="login.php" class="btn btn-sm text-black bg-info">Detail</a></li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i>|</li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i><a href="login.php" class="btn btn-sm text-black bg-info"><i class="bi bi-cart-plus"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
                 </form>
-              </tr>
+                <!-- akhir card -->
+              </div>
               <?php $i++; ?>
             <?php endforeach;  ?>
-
-          </table>
+          </div>
+          <!--  -->
         </div>
       </div><br><br>
-      <h4 id="scrollspyHeading2" class="d-flex justify-content-center fs-2">Testimoni</h4>
 
-      <div class="gallery" id="animated-thumbnails">
-        <a href="asset/img/testi1.jpeg">
-          <img src="asset/img/testi1.jpeg" />
-        </a>
-        <a href="asset/img/testi2.jpeg">
-          <img src="asset/img/testi2.jpeg" />
-        </a>
-        <a href="asset/img/testi3.jpeg">
-          <img src="asset/img/testi3.jpeg" />
-        </a>
-        <a href="asset/img/testi4.jpeg">
-          <img src="asset/img/testi4.jpeg" />
-        </a>
-      </div>
 
     </div>
     <footer class="mt-auto text-dark-50 text-center">
-      <p>COPYRIGHT &copy; 2022 <a href="https://keirasoap.site/" class="text-dark">Keira Soap Factory</a> ALL RIGHTS RESERVED.</p>
+      <p>COPYRIGHT &copy; 2022 <a href="#" class=" text-dark">AdnanRise</a> ALL RIGHTS RESERVED.</p>
     </footer>
   </div><br><br>
 
